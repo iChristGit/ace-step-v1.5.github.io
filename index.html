@@ -354,7 +354,8 @@
         repo: 'ace-step-v1.5.github.io',
         releaseTag: '',
         useJsDelivr: true,
-        preferMp3: true
+        // Use mp3 first since opus may not be available
+        formatPreference: ['mp3', 'flac']
       });
 
       // Function to load the samples data from the JSON file
@@ -1103,13 +1104,8 @@
       // Initialize the play queue
       updatePlayQueue();
 
-      // Preload metadata for all audio files in the background
-      setTimeout(() => {
-        console.log('Preloading audio metadata...');
-        audioLoader.preloadAudio(musicSamples, (loaded, total) => {
-          console.log(`Preloaded ${loaded}/${total} audio files`);
-        });
-      }, 3000); // Start preloading after 3 seconds
+      // Audio is now loaded on-demand when user clicks play
+      // No preloading - better for static pages and saves bandwidth
     });
   </script>
   <section class="page-header">

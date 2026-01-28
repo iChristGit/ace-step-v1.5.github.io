@@ -1,10 +1,9 @@
 /**
  * Enhanced Audio Loader with optimizations for GitHub Pages
- * - Prioritizes Opus over mp3 over flac for faster loading and decoding
+ * - Prioritizes mp3 over flac for better compatibility and faster loading
  * - Uses jsDelivr CDN when available
- * - Pre-initializes audio decoder
- * - Implements progressive loading with Range requests
- * - Uses Web Workers for audio decoding
+ * - Loads audio on-demand when user clicks play (lazy loading)
+ * - Uses Web Workers for audio decoding when available
  */
 
 // Pre-initialize the audio context for faster decoding
@@ -29,8 +28,8 @@ class AudioLoader {
       releaseTag: 'latest',
       // Whether to use jsDelivr CDN
       useJsDelivr: true,
-      // Format preference order (opus first, then mp3, then flac)
-      formatPreference: ['opus', 'mp3', 'flac'],
+      // Format preference order (mp3 first for better compatibility, then flac)
+      formatPreference: ['mp3', 'flac'],
       // Base path for local files
       localBasePath: '',
       // Whether to use progressive loading
